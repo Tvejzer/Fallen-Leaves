@@ -8,6 +8,7 @@ public class PlayerMover : MonoBehaviour
 
     [SerializeField] private float speed = 2.5f;
     [SerializeField] private float rotationSpeed = 0.15f;
+    [SerializeField] private Rigidbody rb;
     private Vector2 move;
 
     public void OnMove(InputAction.CallbackContext context)
@@ -20,8 +21,9 @@ public class PlayerMover : MonoBehaviour
         
     }
 
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         movePlayer();
     }
@@ -32,6 +34,7 @@ public class PlayerMover : MonoBehaviour
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotationSpeed);
 
-        transform.Translate(movement * speed * Time.deltaTime, Space.World);
+        rb.velocity = movement * speed;
+        //transform.Translate(movement * speed * Time.deltaTime, Space.World);
     }
 }
