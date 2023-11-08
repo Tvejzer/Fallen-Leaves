@@ -6,9 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerMover : MonoBehaviour
 {
 
-    [SerializeField] private float speed = 2.5f;
-    [SerializeField] private float rotationSpeed = 0.15f;
-    [SerializeField] private Rigidbody rb;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private Rigidbody2D rb;
     private Vector2 move;
 
     public void OnMove(InputAction.CallbackContext context)
@@ -30,11 +29,6 @@ public class PlayerMover : MonoBehaviour
 
     public void movePlayer()
     {
-        Vector3 movement = new Vector3(move.x, 0f, move.y);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), rotationSpeed);
-
-        rb.velocity = movement * speed;
-        //transform.Translate(movement * speed * Time.deltaTime, Space.World);
+        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
     }
 }
