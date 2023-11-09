@@ -7,7 +7,19 @@ public class PlayerInteractor : MonoBehaviour
 
     [SerializeField] private bool have_key = false;
     [SerializeField] private bool have_cure = false;
+    [SerializeField] private bool movement = true;
 
+    public bool PlayerMovement
+    {
+        get
+        {
+            return movement;
+        }
+        set
+        {
+            movement = value;
+        }
+    }
 
     public bool KeyValue
     {

@@ -8,7 +8,14 @@ public class PlayerMover : MonoBehaviour
 
     [SerializeField] private float speed = 5f;
     [SerializeField] private Rigidbody2D rb;
+    private PlayerInteractor MovementManager;
     private Vector2 move;
+    
+    
+        private void Awake()
+    {
+        MovementManager = FindObjectOfType<PlayerInteractor>();
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -24,7 +31,10 @@ public class PlayerMover : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        movePlayer();
+        if (MovementManager.PlayerMovement)
+        {
+            movePlayer();
+        }
     }
 
     public void movePlayer()
