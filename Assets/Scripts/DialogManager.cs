@@ -9,9 +9,11 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private GameObject dialogDoc2;
     //[SerializeField] private GameObject dialogZorka;
     //[SerializeField] private GameObject dialogHom;
-    [SerializeField] private Sprite[] dialoglist;
+    //[SerializeField] private Sprite[] dialoglist;
+    [SerializeField] private List<Sprite> dialogSprites;
     [SerializeField] private GameObject[] trigers;
-    private string TrigerID;
+    [SerializeField] private Dictionary<int, GameObject> dialogarray;
+
 
     private void Awake()
     {
@@ -52,67 +54,67 @@ public class DialogManager : MonoBehaviour
     private IEnumerator FirstDialog()
     {
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[0];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[0];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc1.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialoglist[1];
+        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialogSprites[1];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc1.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[2];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[2];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc1.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialoglist[3];
+        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialogSprites[3];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc1.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[4];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[4];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc1.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialoglist[5];
+        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialogSprites[5];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc1.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc1.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialoglist[6];
+        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialogSprites[6];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc1.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc1.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialoglist[7];
+        dialogDoc1.GetComponent<SpriteRenderer>().sprite = dialogSprites[7];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc1.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[8];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[8];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[9];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[9];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[10];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[10];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[11];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[11];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 
         dialogDoc2.GetComponent<SpriteRenderer>().enabled = true;
-        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialoglist[12];
+        dialogDoc2.GetComponent<SpriteRenderer>().sprite = dialogSprites[12];
         yield return waitForKeyPress(KeyCode.Space);
         dialogDoc2.GetComponent<SpriteRenderer>().sprite = null;
 

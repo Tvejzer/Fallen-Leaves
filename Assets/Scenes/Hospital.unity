@@ -6162,7 +6162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogDoc1: {fileID: 855588256}
   dialogDoc2: {fileID: 1070277582}
-  dialoglist:
+  dialogSprites:
   - {fileID: 21300000, guid: 882ce262117fb394986a806397674607, type: 3}
   - {fileID: 21300000, guid: b063849d71b20164da4288f87b1f836d, type: 3}
   - {fileID: 21300000, guid: dbf0da7c8dd3fb9458bbe1e01b0a3d9c, type: 3}
