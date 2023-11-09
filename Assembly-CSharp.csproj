@@ -59,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\PlayerMover.cs" />
+    <Compile Include="Assets\Scripts\DoorOpener.cs" />
+    <Compile Include="Assets\Scripts\KeyScript.cs" />
+    <Compile Include="Assets\Scripts\ObjectManager.cs" />
+    <Compile Include="Assets\Scripts\PlayerInteractor.cs" />
+    <Compile Include="Assets\Scripts\CureScript.cs" />
+    <Compile Include="Assets\Scripts\SoundManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
