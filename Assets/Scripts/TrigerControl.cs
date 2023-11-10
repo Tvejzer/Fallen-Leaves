@@ -6,32 +6,25 @@ public class TrigerControl : MonoBehaviour
 {
     private GameObject player;
     private DialogManager dialogManager;
-    [SerializeField] private string TrigerID;
+    [SerializeField] private int TrigerID;
+     private int ChapterNumber;
+     private string ChapterName;
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         dialogManager = FindObjectOfType<DialogManager>();
+        
+    }
+    private void Start()
+    {
+        ChapterName = dialogManager.ChapterList[TrigerID];
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player)
         {
-            dialogManager.StartEvent(TrigerID);
+            dialogManager.StartDialog(ChapterName);
         }
-    }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

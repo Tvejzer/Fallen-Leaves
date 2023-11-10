@@ -8,6 +8,23 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private bool have_key = false;
     [SerializeField] private bool have_cure = false;
     [SerializeField] private bool movement = true;
+    [SerializeField] private bool firstChapterDone = false;
+
+
+
+
+
+    public bool FirstChapterDone
+    {
+        get
+        {
+            return firstChapterDone;
+        }
+        set
+        {
+            firstChapterDone = value;
+        }
+    }
 
     public bool PlayerMovement
     {

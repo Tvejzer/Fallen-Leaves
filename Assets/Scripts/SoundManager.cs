@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    [SerializeField] private List<AudioSource> VoiceOver;
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource pickUp;
     [SerializeField] private AudioSource doorSound;
