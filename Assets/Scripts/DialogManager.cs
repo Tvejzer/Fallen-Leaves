@@ -6,39 +6,39 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
-
-
-    //public List<Sprite> sprites = new List<Sprite>();
-
-
-
+    
+    
+    
+    private List<Sprite> DialogList;
     private GameObject player;
-    private List<string> chapterList;
-    [SerializeField] private GameObject dialogDoc1;
-    [SerializeField] private GameObject dialogDoc2;
-    [SerializeField] private GameObject dialogZorka;
-    [SerializeField] private GameObject SpecialZorka;
-    [SerializeField] private GameObject dialogHom;
-    [SerializeField] private List<Sprite> dialogSprites;
-    [SerializeField] private List<Sprite> specialSprites;
-    [SerializeField] private GameObject[] trigers;
+    private SoundManager soundManager;
     private Dictionary<int, GameObject> dialogDict = new();
-    private Dictionary<string, List<int>> dialogInfo = new();
+    private Dictionary<int, List<int>> dialogInfo = new();
     private int button;
 
 
+    [SerializeField] private GameObject dialogDoc1;
+    [SerializeField] private GameObject dialogDoc2;
+    [SerializeField] private GameObject dialogZorka;
+    [SerializeField] private GameObject specialZorka;
+    [SerializeField] private GameObject dialogHom;
+    [SerializeField] private List<Sprite> specialSprites;
+
+    private void LoadResources()
+    {
+        DialogList = new List<Sprite>(Resources.LoadAll<Sprite>("DialogSprites"));
+        player = GameObject.FindGameObjectWithTag("Player");
+        soundManager = FindObjectOfType<SoundManager>();
+    }
 
     private void DialogInformation()
     {
         // "TriggerID", int First Dialog Sprite, int Last Dialog Sprite, bool If Was Played, int Special Event Trigger, Special Event ID
-        dialogInfo.Add("FirstDialog",new List<int> { 0, 12, 0, 7, 1 });
-        dialogInfo.Add("HomPhase1", new List<int> { 13, 15, 0, 15, 2 });
-        dialogInfo.Add("HomPhase2", new List<int> { 16, 16, 0, 16, 3 });
-        dialogInfo.Add("HomPhase3", new List<int> { 17, 17, 0, 17, 3 });
-        dialogInfo.Add("HomPhase4", new List<int> { 18, 19, 0, 19, 4 });
-
-
-
+        dialogInfo.Add(0, new List<int> { 0, 12, 0, 7, 1 });
+        dialogInfo.Add(1, new List<int> { 13, 15, 0, 15, 2 });
+        dialogInfo.Add(2, new List<int> { 16, 16, 0, 16, 3 });
+        dialogInfo.Add(3, new List<int> { 17, 17, 0, 17, 3 });
+        dialogInfo.Add(4, new List<int> { 18, 19, 0, 19, 4 });
     }
 
 
@@ -68,23 +68,14 @@ public class DialogManager : MonoBehaviour
 
         dialogDict.Add(18, dialogHom);
         dialogDict.Add(19, dialogHom);
-
-
     }
 
 
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         DialogInformation();
         DialogInitialisation();
-        chapterList = new(dialogInfo.Keys);
-
-        // Replace "YourFolderName" with the name of your folder inside Resources
-        //Sprite[] loadedSprites = Resources.LoadAll<Sprite>("/Sprites/Dialogs");
-        //sprites.AddRange(loadedSprites);
-
-
+        LoadResources();
     }
 
     // Start is called before the first frame update
@@ -112,14 +103,12 @@ public class DialogManager : MonoBehaviour
         {
             case 1:
                 print("Doc1 leaves");
-                //player.GetComponent<PlayerInteractor>().FirstChapterDone = true;
-
                 break;
             case 2:
                 StartCoroutine(Event2());
                 break;
             case 3:
-                StartDialog("HomPhase4");
+                StartDialog(4);
                 break;
             case 4:
                 Event4();
@@ -129,7 +118,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public void StartDialog (string TrigerID)
+    public void StartDialog (int TrigerID)
     {
         if (dialogInfo[TrigerID][2] == 0)
         {
@@ -138,7 +127,7 @@ public class DialogManager : MonoBehaviour
     }
 
 
-    private IEnumerator DialogDisplay(string TrigerID)
+    private IEnumerator DialogDisplay(int TrigerID)
     {
 
         bool GoToExit = true;
@@ -146,7 +135,7 @@ public class DialogManager : MonoBehaviour
         for (int i = dialogInfo[TrigerID][0]; i <= dialogInfo[TrigerID][1]; i++)
         {
             dialogDict[i].GetComponent<SpriteRenderer>().enabled = true;
-            dialogDict[i].GetComponent<SpriteRenderer>().sprite = dialogSprites[i];
+            dialogDict[i].GetComponent<SpriteRenderer>().sprite = DialogList[i];
             yield return waitForKeyPress(KeyCode.Space);
             dialogDict[i].GetComponent<SpriteRenderer>().sprite = null;
             if (dialogInfo[TrigerID][3] == i)
@@ -157,17 +146,18 @@ public class DialogManager : MonoBehaviour
             else GoToExit = true;
 
         }
-        //yield return null;
+
         if (GoToExit)
         {
             ExitEvent(TrigerID);
         }
     }
 
-    private void ExitEvent(string TrigerID)
+    private void ExitEvent(int TrigerID)
     {
         player.GetComponent<PlayerInteractor>().PlayerMovement = true;
         dialogInfo[TrigerID][2] = 1;
+        player.GetComponent<PlayerInteractor>().ChapterProgresss = TrigerID+1;
     }
 
     public IEnumerator waitForKeyPress(KeyCode key)
@@ -183,29 +173,20 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-
-    public List<string> ChapterList
-    {
-        get
-        {
-            return chapterList;
-        }
-    }
-
     public IEnumerator Event2()
     {
         player.GetComponent<PlayerInteractor>().PlayerMovement = false;
-        SpecialZorka.GetComponent<SpriteRenderer>().enabled = true;
-        SpecialZorka.GetComponent<SpriteRenderer>().sprite = specialSprites[0];
+        specialZorka.GetComponent<SpriteRenderer>().enabled = true;
+        specialZorka.GetComponent<SpriteRenderer>().sprite = specialSprites[0];
         yield return PressTheeseKey(KeyCode.Alpha1, KeyCode.Alpha2);
-        SpecialZorka.GetComponent<SpriteRenderer>().sprite = null;
+        specialZorka.GetComponent<SpriteRenderer>().sprite = null;
         if (button ==1)
         {
-            StartDialog("HomPhase2");
+            StartDialog(2);
         }
         else if (button ==2)
         {
-            StartDialog("HomPhase3");
+            StartDialog(3);
         }
     }
 
@@ -231,7 +212,8 @@ public class DialogManager : MonoBehaviour
     public void Event4()
     {
         player.GetComponent<PlayerInteractor>().KeyValue = true;
-        player.GetComponent<PlayerInteractor>().PlayerMovement = true;
+        soundManager.SfxPickUp();
+        ExitEvent(4);
     }
 
 }

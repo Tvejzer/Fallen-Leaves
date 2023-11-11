@@ -8,21 +8,18 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private bool have_key = false;
     [SerializeField] private bool have_cure = false;
     [SerializeField] private bool movement = true;
-    [SerializeField] private bool firstChapterDone = false;
+    [SerializeField] private int chapterProgress = 0;
 
 
-
-
-
-    public bool FirstChapterDone
+    public int ChapterProgresss
     {
         get
         {
-            return firstChapterDone;
+            return chapterProgress;
         }
         set
         {
-            firstChapterDone = value;
+            chapterProgress = value;
         }
     }
 
@@ -60,19 +57,5 @@ public class PlayerInteractor : MonoBehaviour
         {
             have_cure = value;
         }
-    }
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

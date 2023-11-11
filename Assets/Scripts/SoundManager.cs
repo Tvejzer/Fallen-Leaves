@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private List<AudioSource> VoiceOver;
+    [SerializeField] private List<AudioClip> VoiceOverClip;
     [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource pickUp;
     [SerializeField] private AudioSource doorSound;
     [SerializeField] private AudioSource hvala;
-    [SerializeField] private AudioSource sfxTest5;
+    [SerializeField] private AudioSource DialogVoiceOver;
     [SerializeField] private AudioSource sfxTest6;
     [SerializeField] private AudioSource sfxTest7;
     [SerializeField] private AudioSource sfxTest8;

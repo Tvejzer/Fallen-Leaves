@@ -27,7 +27,7 @@ public class DoorOpener : ObjectManager
 
     private void Open()
     {
-        SoundManager.SfxPickUp();
+        SoundManager.SfxDoor();
         door.transform.Rotate(0.0f, 0.0f, maxRotation);
         opened = true;
     }
