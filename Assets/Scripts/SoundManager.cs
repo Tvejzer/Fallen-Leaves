@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource doorSound;
     [SerializeField] private AudioSource hvala;
     [SerializeField] private AudioSource DialogVoiceOver;
-    [SerializeField] private AudioSource sfxTest6;
+    [SerializeField] private AudioSource death;
     [SerializeField] private AudioSource sfxTest7;
     [SerializeField] private AudioSource sfxTest8;
         
@@ -18,6 +18,11 @@ public class SoundManager : MonoBehaviour
     public void SfxPickUp() 
     {
         pickUp.Play();
+    }
+
+    public void SfxDeath()
+    {
+        death.Play();
     }
 
     public void SfxDoor()

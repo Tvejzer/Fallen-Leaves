@@ -17,6 +17,7 @@ public class CureScript : ObjectManager
         if (PlayerCollision)
         {
             Player.GetComponent<PlayerInteractor>().CureValue = true;
+            Player.GetComponent<PlayerInteractor>().ChapterProgresss = 6;
             SoundManager.SfxPickUp();
 
             if (Destroyy)

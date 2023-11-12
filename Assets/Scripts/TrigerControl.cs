@@ -7,20 +7,38 @@ public class TrigerControl : MonoBehaviour
     private GameObject player;
     private DialogManager dialogManager;
     [SerializeField] private int TrigerID;
+    [SerializeField] private int Appear;
+    private int chapterProgress;
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         dialogManager = FindObjectOfType<DialogManager>();
-        
+        chapterProgress = player.GetComponent<PlayerInteractor>().ChapterProgresss;
+
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == player)
         {
-            if (player.GetComponent<PlayerInteractor>().ChapterProgresss == TrigerID)
+            if (chapterProgress == Appear)
             {
-                dialogManager.StartDialog(TrigerID);
+                dialogManager.OnTrigger(TrigerID);
             }
+        }
+    }
+
+    private void Update()
+    {
+        chapterProgress = player.GetComponent<PlayerInteractor>().ChapterProgresss;
+
+        if (chapterProgress != TrigerID & chapterProgress != Appear)
+        {
+            GetComponent<SpriteRenderer>().enabled = false;
+        }
+        if (chapterProgress == TrigerID | chapterProgress == Appear)
+        {
+            GetComponent<SpriteRenderer>().enabled = true;
         }
     }
 }

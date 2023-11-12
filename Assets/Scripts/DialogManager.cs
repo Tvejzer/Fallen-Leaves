@@ -12,6 +12,7 @@ public class DialogManager : MonoBehaviour
     private List<Sprite> DialogList;
     private GameObject player;
     private SoundManager soundManager;
+    private MoverManager moverManager;
     private Dictionary<int, GameObject> dialogDict = new();
     private Dictionary<int, List<int>> dialogInfo = new();
     private int button;
@@ -29,6 +30,7 @@ public class DialogManager : MonoBehaviour
         DialogList = new List<Sprite>(Resources.LoadAll<Sprite>("DialogSprites"));
         player = GameObject.FindGameObjectWithTag("Player");
         soundManager = FindObjectOfType<SoundManager>();
+        moverManager = FindObjectOfType<MoverManager>();
     }
 
     private void DialogInformation()
@@ -103,6 +105,7 @@ public class DialogManager : MonoBehaviour
         {
             case 1:
                 print("Doc1 leaves");
+                moverManager.Event1();
                 break;
             case 2:
                 StartCoroutine(Event2());
@@ -118,13 +121,37 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public void StartDialog (int TrigerID)
+    private void StartDialog (int TrigerID)
     {
         if (dialogInfo[TrigerID][2] == 0)
         {
             StartCoroutine(DialogDisplay(TrigerID));
         }
     }
+    public void OnTrigger(int EventID)
+    {
+        switch (EventID)
+        {
+            case 0:
+                StartDialog(EventID);
+                break;
+            case 1:
+                StartDialog(EventID);
+                break;
+            case 6:
+                soundManager.SfxDeath();
+                player.GetComponent<PlayerInteractor>().ChapterProgresss = 8;
+                player.GetComponent<PlayerInteractor>().CureValue = false;
+                break;
+            case 7:
+                soundManager.SfxHvala();
+                player.GetComponent<PlayerInteractor>().ChapterProgresss = 8;
+                player.GetComponent<PlayerInteractor>().CureValue = false;
+                break;
+        }
+    }
+
+
 
 
     private IEnumerator DialogDisplay(int TrigerID)
