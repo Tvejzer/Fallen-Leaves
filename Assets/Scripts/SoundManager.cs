@@ -4,34 +4,50 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    [SerializeField] private List<AudioClip> VoiceOverClip;
-    [SerializeField] private AudioSource music;
-    [SerializeField] private AudioSource pickUp;
-    [SerializeField] private AudioSource doorSound;
-    [SerializeField] private AudioSource hvala;
+    private List<AudioClip> VoiceOverClip;
+    private List<AudioClip> sFX;
+    [SerializeField] private AudioSource SFX_Player;
     [SerializeField] private AudioSource DialogVoiceOver;
-    [SerializeField] private AudioSource death;
-    [SerializeField] private AudioSource sfxTest7;
-    [SerializeField] private AudioSource sfxTest8;
-        
-
-    public void SfxPickUp() 
+    private void Awake()
     {
-        pickUp.Play();
+        VoiceOverClip = new List<AudioClip>(Resources.LoadAll<AudioClip>("VoiceOverClips"));
+        sFX = new List<AudioClip>(Resources.LoadAll<AudioClip>("SFX"));
     }
 
-    public void SfxDeath()
+    public void DialogVoice(int id)
     {
-        death.Play();
+        if (VoiceOverClip[id] != null)
+        {
+            DialogVoiceOver.clip = VoiceOverClip[id];
+            DialogVoiceOver.Play();
+        }
+    }
+
+    public void DialogStop()
+    {
+        DialogVoiceOver.Stop();
+    }
+    public void SfxPickUp() 
+    {
+        SFX_Player.clip = sFX[1];
+        SFX_Player.Play();
     }
 
     public void SfxDoor()
     {
-        doorSound.Play();
+        SFX_Player.clip = sFX[2];
+        SFX_Player.Play();
     }
+    public void SfxDeath()
+    {
+        SFX_Player.clip = sFX[3];
+        SFX_Player.Play();
+    }
+
     public void SfxHvala()
     {
-        hvala.Play();
+        SFX_Player.clip = sFX[4];
+        SFX_Player.Play();
     }
 
 }

@@ -163,7 +163,9 @@ public class DialogManager : MonoBehaviour
         {
             dialogDict[i].GetComponent<SpriteRenderer>().enabled = true;
             dialogDict[i].GetComponent<SpriteRenderer>().sprite = DialogList[i];
+            soundManager.DialogVoice(i);
             yield return waitForKeyPress(KeyCode.Space);
+            soundManager.DialogStop();
             dialogDict[i].GetComponent<SpriteRenderer>().sprite = null;
             if (dialogInfo[TrigerID][3] == i)
             {
