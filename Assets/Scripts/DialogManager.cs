@@ -16,7 +16,7 @@ public class DialogManager : MonoBehaviour
     private Dictionary<int, GameObject> dialogDict = new();
     private Dictionary<int, List<int>> dialogInfo = new();
     private int button;
-
+    private QuestLog questLog;
 
     [SerializeField] private GameObject dialogDoc1;
     [SerializeField] private GameObject dialogDoc2;
@@ -33,6 +33,7 @@ public class DialogManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         soundManager = FindObjectOfType<SoundManager>();
         moverManager = FindObjectOfType<MoverManager>();
+        questLog = FindObjectOfType<QuestLog>();
     }
 
     private void DialogInformation()
@@ -168,6 +169,7 @@ public class DialogManager : MonoBehaviour
                 player.GetComponent<PlayerInteractor>().PlayerMovement = true;
                 break;
             case 1:
+                questLog.questLog(0);
                 moverManager.Event1();
                 break;
             case 2:
@@ -183,6 +185,7 @@ public class DialogManager : MonoBehaviour
                 StartCoroutine(EventChose(1,6,7,1));
                 break;
             case 6:
+                questLog.questOff();
                 StartDialog(9);
                 break; 
             case 7:
@@ -208,6 +211,7 @@ public class DialogManager : MonoBehaviour
                 StartDialog(16);
                 break; 
             case 13:
+                questLog.questOff();
                 StartDialog(15);
                 break; 
             case 14:
@@ -303,6 +307,7 @@ public class DialogManager : MonoBehaviour
     {
         player.GetComponent<PlayerInteractor>().KeyValue = true;
         soundManager.SfxPickUp();
+        questLog.questLog(1);
         ExitEvent(4);
     }
 

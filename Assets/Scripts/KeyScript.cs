@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class KeyScript : ObjectManager
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -16,6 +11,7 @@ public class KeyScript : ObjectManager
         if (PlayerCollision)
         {
             Player.GetComponent<PlayerInteractor>().KeyValue = true;
+            QuestLog.questLog(1);
             SoundManager.SfxPickUp();
 
             if (Destroyy)

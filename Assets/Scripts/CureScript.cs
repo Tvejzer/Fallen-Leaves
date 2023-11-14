@@ -19,6 +19,7 @@ public class CureScript : ObjectManager
             Player.GetComponent<PlayerInteractor>().CureValue = true;
             Player.GetComponent<PlayerInteractor>().ChapterProgresss = 6;
             SoundManager.SfxPickUp();
+            QuestLog.questLog(2);
 
             if (Destroyy)
             {

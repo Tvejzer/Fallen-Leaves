@@ -8,12 +8,14 @@ public class ObjectManager : MonoBehaviour
     private bool playerCollision = false;
     private SoundManager soundManager;
     [SerializeField] bool destroy = false;
+    private QuestLog questLog;
 
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         soundManager = FindObjectOfType<SoundManager>();
+        questLog = FindObjectOfType<QuestLog>();
     }
 
 
@@ -28,6 +30,18 @@ public class ObjectManager : MonoBehaviour
             destroy = value;
         }
     }
+    public QuestLog QuestLog
+    {
+        get
+        {
+            return questLog;
+        }
+        set
+        {
+            questLog = value;
+        }
+    }
+
 
     public SoundManager SoundManager
     {
