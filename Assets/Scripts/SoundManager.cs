@@ -38,16 +38,4 @@ public class SoundManager : MonoBehaviour
         SFX_Player.clip = sFX[2];
         SFX_Player.Play();
     }
-    public void SfxDeath()
-    {
-        SFX_Player.clip = sFX[3];
-        SFX_Player.Play();
-    }
-
-    public void SfxHvala()
-    {
-        SFX_Player.clip = sFX[4];
-        SFX_Player.Play();
-    }
-
 }
