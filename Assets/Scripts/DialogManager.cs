@@ -155,11 +155,6 @@ public class DialogManager : MonoBehaviour
     }
 
 
-
-
-
-
-
     public void StartEvent(int EventID)
     {
 
