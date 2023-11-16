@@ -283,6 +283,7 @@ public class DialogManager : MonoBehaviour
         player.GetComponent<PlayerInteractor>().ChapterProgresss = TrigerID+1;
     }
 
+    
     public IEnumerator waitForKeyPress(KeyCode key)
     {
         bool done = false;
@@ -295,6 +296,21 @@ public class DialogManager : MonoBehaviour
             yield return null;
         }
     }
+
+    /*
+    public IEnumerator waitForKeyPress(KeyCode key)
+    {
+        bool done = false;
+        while (!done)
+        {
+            if (player.GetComponent<PlayerMover>().InteractPressed)
+            {
+                done = true;
+            }
+            yield return null;
+        }
+    }
+    */
 
 
 
