@@ -362,4 +362,6 @@ public class DialogManager : MonoBehaviour
         }
     }
 
+    public string Test { get; set; } = "true";
+
 }
