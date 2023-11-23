@@ -47,6 +47,7 @@ public class PlayerMover : MonoBehaviour
         }
         else if (context.canceled) 
         {
+            print("Unpressed");
             interactPressed = false;
         }
         
