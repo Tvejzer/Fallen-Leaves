@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TrigerControl : MonoBehaviour
 {
+    [SerializeField] private Sprite skinPassive;
+    [SerializeField] private Sprite skinActive;
     private GameObject player;
     private DialogManager dialogManager;
     [SerializeField] private int TrigerID;
@@ -28,6 +30,7 @@ public class TrigerControl : MonoBehaviour
         }
     }
 
+
     private void Update()
     {
         chapterProgress = player.GetComponent<PlayerInteractor>().ChapterProgresss;
@@ -41,4 +44,14 @@ public class TrigerControl : MonoBehaviour
             GetComponent<SpriteRenderer>().enabled = true;
         }
     }
+    public void Activate()
+    {
+        GetComponent<SpriteRenderer>().sprite = skinActive;
+    }
+
+    public void Deactivate()
+    {
+        GetComponent<SpriteRenderer>().sprite = skinPassive;
+    }
+
 }

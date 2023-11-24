@@ -1,75 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMover : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private float speed = 5f;
     private Rigidbody2D rb;
-    private PlayerInteractor MovementManager;
+    private bool movementAllowed;
     private Vector2 move;
-    private bool interactPressed = false;
+
+    private void Awake()
+    {
+        movementAllowed = true;
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (DialogueManager.GetInstance().dialogueIsPlaying)
+        {
+            return;
+        }
+        HandleMovement();
+    }
+
+    public void HandleMovement()
+    {
+        Vector2 move = InputManager.GetInstance().GetMoveDirection();
+        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
+    }
 
 
-
-    public bool InteractPressed
+    public bool MovementAllowed
     {
         get
         {
-            return interactPressed;
+            return movementAllowed;
         }
-        set 
+        set
         {
-            interactPressed = value;
+            movementAllowed = value;
         }
-    }
-    
-    
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        MovementManager = FindObjectOfType<PlayerInteractor>();
-    }
-
-    public void OnMove(InputAction.CallbackContext context)
-    {
-        move = context.ReadValue<Vector2>();
-    }
-
-    public void OnInteraction(InputAction.CallbackContext context)
-    {
-        if (context.performed) 
-        {
-            print("Pressed");
-            interactPressed = true;
-        }
-        else if (context.canceled) 
-        {
-            print("Unpressed");
-            interactPressed = false;
-        }
-        
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        if (MovementManager.PlayerMovement)
-        {
-            movePlayer();
-        }
-    }
-
-    public void movePlayer()
-    {
-        rb.MovePosition(rb.position + move * speed * Time.fixedDeltaTime);
     }
 }

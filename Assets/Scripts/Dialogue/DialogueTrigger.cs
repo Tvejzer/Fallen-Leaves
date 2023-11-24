@@ -6,25 +6,32 @@ public class DialogueTrigger : MonoBehaviour
 {
 
 
-    private bool playerInRanghe;
+    [SerializeField] private Sprite skinPassive;
+    [SerializeField] private Sprite skinActive;
+    private bool playerInRange;
     [SerializeField] private TextAsset inkJson;
 
 
 
     private void Awake()
     {
+        playerInRange = false;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 
     private void Update()
     {
-        if (playerInRanghe)
+        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
-            GetComponent<SpriteRenderer>().enabled = false;
-            print(inkJson.text);
+            Activate();
+            if (InputManager.GetInstance().GetInteractPressed())
+            {
+                DialogueManager.GetInstance().EnterDialogueMode(inkJson);
+            }
         }
         else
         {
-            GetComponent<SpriteRenderer>().enabled = true;
+            Deactivate();
         }
     }
 
@@ -32,7 +39,7 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            playerInRanghe = true;
+            playerInRange = true;
         }
     }
 
@@ -40,7 +47,19 @@ public class DialogueTrigger : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            playerInRanghe = false;
+            playerInRange = false;
         }
+    }
+
+    public void Activate()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<SpriteRenderer>().sprite = skinActive;
+    }
+
+    public void Deactivate()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
+        GetComponent<SpriteRenderer>().sprite = skinPassive;
     }
 }
