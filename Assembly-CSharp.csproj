@@ -866,14 +866,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="InkEditor.csproj">
-      <Project>{705B0251-70F4-82C1-11FC-1112BE3B5C88}</Project>
-      <Name>InkEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Ink-Libraries.csproj">
-      <Project>{AAB775B8-8367-6C10-87EE-74562A22CE6A}</Project>
-      <Name>Ink-Libraries</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
